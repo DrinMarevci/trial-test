@@ -1,7 +1,6 @@
 import React from "react";
 import Banner from "./components/banner";
 import Table from "./components/table";
-import TableRows from "./components/tableRows";
 import "./index.css";
 
 function App() {
@@ -9,7 +8,6 @@ function App() {
     <div className="App-container ">
       <Banner />
       <Table />
-      <TableRows />
     </div>
   );
 }
