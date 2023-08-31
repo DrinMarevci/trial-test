@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import TableRows from "./tableRows";
 import Modal from "../components/Modal";
-import CreateModal from "./CreateModal";
+import CreateModal from "../components/CreateModal";
 
 export default function Table({ jobs, setJobs }) {
   const [searchInput, setSearchInput] = useState("");
   const [jobResults, setJobResults] = useState([...jobs]);
   const [showModal, setShowModal] = useState(false);
-  const [showCreateModal, setShowCreateModal] = useState(true);
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
   useEffect(() => {
     setJobResults(jobs);
@@ -82,6 +82,7 @@ export default function Table({ jobs, setJobs }) {
           </label>
           <label>
             <button
+              onClick={openCreateModal}
               className="ml-2 pr-10 w-[15rem] h-[2rem] bg-green text-white rounded relative bg-right bg-no-repeat"
               style={{
                 backgroundImage:
