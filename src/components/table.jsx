@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
 import TableRows from "./tableRows";
-import Modal from "../components/Modal";
+import EditModal from "./EditModal";
 import CreateModal from "../components/CreateModal";
+import { initialJobs } from "../jobs";
 
 export default function Table({ jobs, setJobs }) {
   const [searchInput, setSearchInput] = useState("");
-  const [jobResults, setJobResults] = useState([...jobs]);
-  const [showModal, setShowModal] = useState(false);
+  const [jobResults, setJobResults] = useState([...initialJobs]);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [editingJob, setEditingJob] = useState(null);
 
   useEffect(() => {
     setJobResults(jobs);
   }, [jobs]);
 
-  const closeModal = () => setShowModal(false);
-  const openModal = () => setShowModal(true);
+  const closeEditModal = () => setShowEditModal(false);
+  const openEditModal = () => setShowEditModal(true);
 
   const closeCreateModal = () => setShowCreateModal(false);
   const openCreateModal = () => setShowCreateModal(true);
@@ -33,14 +35,23 @@ export default function Table({ jobs, setJobs }) {
   }, [searchInput]);
 
   return (
-    <div className="flex flex-col py-2 my-5 mx-2 rounded-lg border-black bg-slate-50">
-      <Modal show={showModal} close={closeModal} />
+    <div className="flex flex-col py-2 mx-2 my-5 border-black rounded-lg bg-slate-50">
+      {editingJob !== null && (
+        <EditModal
+          show={showEditModal}
+          close={closeEditModal}
+          editingJob={editingJob}
+          setEditingJob={setEditingJob}
+          setJobs={setJobs}
+          jobs={jobs}
+        />
+      )}
       <CreateModal
         show={showCreateModal}
         close={closeCreateModal}
         setJobs={setJobs}
       />
-      <div className="title flex justify-start">Title</div>
+      <div className="flex justify-start title">Title</div>
       <div className="flex justify-between bg-white">
         <div className="flex my-3">
           <svg
@@ -97,7 +108,11 @@ export default function Table({ jobs, setJobs }) {
         </div>
       </div>
       <div>
-        <TableRows jobResults={jobResults} openModal={openModal} />
+        <TableRows
+          jobResults={jobResults}
+          openEditModal={openEditModal}
+          setEditingJob={setEditingJob}
+        />
       </div>
     </div>
   );

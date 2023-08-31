@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import { jobs, Status } from "../jobs";
 
-export default function TableRow({ job, index, openModal }) {
+export default function TableRow({ job, index, openEditModal }) {
   const buttonRef = useRef();
   const divRef = useRef();
 
@@ -22,20 +22,23 @@ export default function TableRow({ job, index, openModal }) {
   }, []);
 
   return (
-    <tr ref={divRef} onClick={openModal} className="cursor-pointer">
-      <td className=" px-6 py-1 whitespace-no-wrap">
-        <div className="flex justify-center items-center">
+    <tr ref={divRef} onClick={openEditModal} className="cursor-pointer">
+      <td className="px-6 py-1 whitespace-no-wrap ">
+        <div className="flex items-center justify-center">
           <div className="ml-4">
-            <div className="text-sm leading-5 font-medium text-gray-900">
+            <div className="text-sm font-medium leading-5 text-gray-900">
               {job.name}
             </div>
           </div>
         </div>
       </td>
-      <td className="flex justify-center items-center px-6 py-1 whitespace-no-wrap">
-        <button ref={buttonRef} className="text-white rounded-lg px-4 py-2 ">
+      <td className="flex items-center justify-center px-6 py-1 whitespace-no-wrap">
+        <button
+          ref={buttonRef}
+          className="py-2 w-[15rem] text-white rounded-lg "
+        >
           <div className="px-20">
-            <div className="text-sm text-center leading-5 font-medium text-white">
+            <div className="text-sm font-medium leading-5 text-center text-white">
               {job.status}
             </div>
           </div>
