@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import { jobs, Status } from "../jobs";
 
-export default function TableRow({ job, index }) {
+export default function TableRow({ job, index, openModal }) {
   const buttonRef = useRef();
   const divRef = useRef();
 
@@ -22,7 +22,7 @@ export default function TableRow({ job, index }) {
   }, []);
 
   return (
-    <tr ref={divRef}>
+    <tr ref={divRef} onClick={openModal} className="cursor-pointer">
       <td className=" px-6 py-1 whitespace-no-wrap">
         <div className="flex justify-center items-center">
           <div className="ml-4">

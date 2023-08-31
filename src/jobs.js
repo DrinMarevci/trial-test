@@ -4,7 +4,7 @@ export const Status = {
   OnHold: "On Hold",
 };
 
-export const jobs = [
+export let initialJobs = [
   { name: "davi", status: Status.Completed },
   { name: "naimi", status: Status.InProgress },
   { name: "bashkimi", status: Status.InProgress },

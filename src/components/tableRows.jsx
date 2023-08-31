@@ -1,6 +1,6 @@
 import TableRow from "./tableRow";
 
-export default function TableRows({ jobResults }) {
+export default function TableRows({ jobResults, openModal }) {
   return (
     <table className="min-w-full divide-y divide-gray-200">
       <thead>
@@ -16,7 +16,14 @@ export default function TableRows({ jobResults }) {
       <tbody className="bg-white divide-y divide-gray-50">
         {jobResults.length > 0 ? (
           jobResults.map((job, number) => {
-            return <TableRow key={job.name} job={job} index={number} />;
+            return (
+              <TableRow
+                key={job.name}
+                job={job}
+                index={number}
+                openModal={openModal}
+              />
+            );
           })
         ) : (
           <></>

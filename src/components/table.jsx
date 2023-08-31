@@ -1,10 +1,23 @@
 import { useEffect, useState } from "react";
 import TableRows from "./tableRows";
-import { jobs } from "../jobs";
+import Modal from "../components/Modal";
+import CreateModal from "./CreateModal";
 
-export default function Table() {
+export default function Table({ jobs, setJobs }) {
   const [searchInput, setSearchInput] = useState("");
-  const [jobResults, setJobResults] = useState([...jobs]); 
+  const [jobResults, setJobResults] = useState([...jobs]);
+  const [showModal, setShowModal] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(true);
+
+  useEffect(() => {
+    setJobResults(jobs);
+  }, [jobs]);
+
+  const closeModal = () => setShowModal(false);
+  const openModal = () => setShowModal(true);
+
+  const closeCreateModal = () => setShowCreateModal(false);
+  const openCreateModal = () => setShowCreateModal(true);
 
   useEffect(() => {
     if (searchInput === "") {
@@ -21,6 +34,12 @@ export default function Table() {
 
   return (
     <div className="flex flex-col py-2 my-5 mx-2 rounded-lg border-black bg-slate-50">
+      <Modal show={showModal} close={closeModal} />
+      <CreateModal
+        show={showCreateModal}
+        close={closeCreateModal}
+        setJobs={setJobs}
+      />
       <div className="title flex justify-start">Title</div>
       <div className="flex justify-between bg-white">
         <div className="flex my-3">
@@ -77,7 +96,7 @@ export default function Table() {
         </div>
       </div>
       <div>
-        <TableRows jobResults={jobResults} />
+        <TableRows jobResults={jobResults} openModal={openModal} />
       </div>
     </div>
   );

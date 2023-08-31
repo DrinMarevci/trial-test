@@ -1,4 +1,4 @@
-import { jobs, Status } from "../jobs";
+import { initialJobs, Status } from "../jobs";
 import { useEffect, useState } from "react";
 
 function Banner() {
@@ -11,14 +11,14 @@ function Banner() {
     let n2 = 0;
     let n3 = 0;
 
-    jobs.forEach((job) => {
+    initialJobs.forEach((job) => {
       if (job.status === Status.Completed) n1++;
       else if (job.status === Status.InProgress) n2++;
       else if (job.status === Status.OnHold) n3++;
     });
 
-    setNumOfJobsInProgress(n2);
     setNumOfJobsCompleted(n1);
+    setNumOfJobsInProgress(n2);
     setNumOfJobsOnHold(n3);
   }, []);
 
